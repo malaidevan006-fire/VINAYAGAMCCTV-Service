@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vinayagam CCTV Service | Buy CCTV Online | Melur, Madurai</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <style>
+        :root { --green:#2ecc71; --gd:#27ae60; --dark:#1a1a2e; --dark2:#16213e; }
+        *{ box-sizing:border-box; margin:0; padding:0; }
+        body{ font-family:'Segoe UI',sans-serif; background:#f4f6f8; color:#333; }
+
+        /* TOP BAR */
+        .topbar{ background:var(--gd); color:#fff; font-size:.8rem; padding:6px 0; }
+        .topbar a{ color:#fff; text-decoration:none; }
+
+        /* NAV */
+        .navbar{ background:var(--dark); padding:14px 0; position:sticky; top:0; z-index:1000; box-shadow:0 2px 12px rgba(0,0,0,.35); }
+        .brand{ font-size:1.4rem; font-weight:800; color:#fff; text-decoration:none; }
+        .brand span{ color:var(--green); }
+        .navlinks a{ color:#ccc; text-decoration:none; margin:0 11px; font-size:.88rem; font-weight:500; transition:color .2s; }
+        .navlinks a:hover,.navlinks a.active{ color:var(--green); }
+        .callbtn{ background:var(--green); color:#fff; padding:8px 18px; border-radius:6px; text-decoration:none; font-weight:700; font-size:.85rem; transition:background .2s; }
+        .callbtn:hover{ background:var(--gd); color:#fff; }
+
+        /* HERO */
+        .hero{ background:linear-gradient(135deg,var(--dark),var(--dark2)); padding:38px 0 28px; color:#fff; }
+        .aipill{ background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; padding:4px 12px; border-radius:20px; font-size:.7rem; font-weight:700; letter-spacing:.5px; display:inline-block; margin-bottom:10px; }
+        .sbox{ background:rgba(255,255,255,.07); border:1.5px solid rgba(255,255,255,.18); border-radius:10px 0 0 10px; color:#fff; padding:13px 18px; font-size:.92rem; width:100%; }
+        .sbox::placeholder{ color:#aaa; }
+        .sbox:focus{ outline:none; border-color:var(--green); }
+        .sbtn{ background:var(--green); color:#fff; border:none; padding:13px 22px; font-weight:700; border-radius:0 10px 10px 0; cursor:pointer; font-size:.92rem; }
+        .sbtn:hover{ background:var(--gd); }
+        .qchip{ padding:5px 13px; border-radius:16px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.06); color:#ddd; font-size:.76rem; cursor:pointer; transition:all .2s; }
+        .qchip:hover{ background:var(--green); border-color:var(--green); color:#fff; }
+
+        /* LAYOUT */
+        .layout{ display:grid; grid-template-columns:230px 1fr; gap:20px; padding:22px 0; }
+        @media(max-width:900px){ .layout{ grid-template-columns:1fr; } }
+
+        /* FILTER */
+        .fpanel{ background:#fff; border-radius:12px; border:1px solid #e4e4e4; padding:18px; position:sticky; top:74px; height:fit-content; }
+        .fhead{ font-weight:700; font-size:.86rem; color:var(--dark); border-bottom:2px solid var(--green); padding-bottom:8px; margin-bottom:14px; }
+        .fgrp{ margin-bottom:16px; }
+        .flbl{ font-size:.74rem; font-weight:700; color:#666; text-transform:uppercase; letter-spacing:.5px; margin-bottom:7px; }
+        .chip{ display:inline-block; padding:5px 11px; border-radius:14px; border:1.5px solid #ddd; font-size:.76rem; cursor:pointer; margin:2px; transition:all .18s; background:#fff; color:#555; }
+        .chip.on,.chip:hover{ background:var(--green); color:#fff; border-color:var(--green); }
+        .pslider{ width:100%; accent-color:var(--green); margin:5px 0; }
+        .rbtn{ width:100%; background:var(--dark); color:#fff; border:none; border-radius:8px; padding:9px; font-size:.8rem; font-weight:600; cursor:pointer; }
+        .rbtn:hover{ background:#2c2c54; }
+        .pval{ font-size:.8rem; font-weight:700; color:var(--green); }
+        .price-range-info{ font-size:.7rem; color:#aaa; margin-top:2px; }
+        .loading-note{ color:#888; font-size:.88rem; }
+
+        /* PRODUCTS */
+        .rmeta{ font-size:.8rem; color:#888; }
+        .pgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(195px,1fr)); gap:14px; }
+        .pc{ background:#fff; border-radius:12px; border:1px solid #e8e8e8; overflow:hidden; display:flex; flex-direction:column; transition:transform .22s,box-shadow .22s,border-color .22s; }
+        .pc:hover{ transform:translateY(-5px); box-shadow:0 10px 24px rgba(46,204,113,.13); border-color:var(--green); }
+        .iw{ background:linear-gradient(135deg,#f4fff8 0%,#eef6ff 100%); height:145px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+        .iw i{ font-size:3rem; color:#c8d0d8; }
+        .product-image{ width:100%; height:100%; object-fit:cover; display:block; }
+        .marketing-pill{ position:absolute; left:8px; bottom:8px; background:rgba(26,26,46,.85); color:#fff; font-size:.62rem; padding:4px 7px; border-radius:999px; font-weight:700; letter-spacing:.3px; }
+        .bbrand{ position:absolute; top:7px; left:7px; background:var(--dark); color:#fff; font-size:.62rem; padding:3px 7px; border-radius:4px; font-weight:700; }
+        .bsrc{ position:absolute; top:7px; right:7px; font-size:.62rem; padding:3px 7px; border-radius:4px; font-weight:700; }
+        .samz{ background:#FF9900; color:#fff; }
+        .sfk{ background:#2874F0; color:#fff; }
+        .cbody{ padding:11px; flex:1; display:flex; flex-direction:column; }
+        .ptitle{ font-size:.8rem; font-weight:700; color:var(--dark); line-height:1.3; margin-bottom:5px; }
+        .stags{ margin-bottom:6px; }
+        .stag{ display:inline-block; background:#f0f9f4; color:#1e7e34; font-size:.64rem; padding:2px 6px; border-radius:9px; margin:1px; }
+        .pstars{ color:#f39c12; font-size:.76rem; }
+        .pstars span{ color:#aaa; }
+        .prow{ margin:6px 0 9px; }
+        .pprice{ font-size:1.05rem; font-weight:800; color:var(--dark); }
+        .pmrp{ font-size:.73rem; color:#bbb; text-decoration:line-through; margin-left:5px; }
+        .pdisc{ font-size:.71rem; color:var(--gd); font-weight:700; margin-left:4px; }
+        .bam{ display:block; text-align:center; background:#FF9900; color:#fff; border:none; border-radius:7px; padding:7px 5px; font-size:.76rem; font-weight:700; text-decoration:none; cursor:pointer; margin-bottom:4px; }
+        .bam:hover{ background:#e68800; color:#fff; }
+        .bfk{ display:block; text-align:center; background:#2874F0; color:#fff; border:none; border-radius:7px; padding:7px 5px; font-size:.76rem; font-weight:700; text-decoration:none; cursor:pointer; margin-bottom:4px; }
+        .bfk:hover{ background:#1a5dc8; color:#fff; }
+        .bins{ display:block; text-align:center; background:var(--dark); color:#fff; border:none; border-radius:7px; padding:7px 5px; font-size:.75rem; font-weight:600; text-decoration:none; cursor:pointer; }
+        .bins:hover{ background:#2c2c54; color:#fff; }
+
+        /* AI BOX */
+        .aibox{ background:#f0faf5; border:1.5px solid #b2e4cc; border-radius:10px; padding:11px 15px; margin-bottom:15px; font-size:.83rem; display:none; }
+
+        /* LOADING */
+        .ldwrap{ text-align:center; padding:60px 20px; }
+        .spin{ width:44px; height:44px; border:4px solid #e0f5ea; border-top:4px solid var(--green); border-radius:50%; animation:spin .75s linear infinite; margin:0 auto 14px; }
+        @keyframes spin{ to{ transform:rotate(360deg); } }
+
+        /* SECTION COMMON */
+        .secpad{ padding:52px 0; }
+        .stitle{ font-size:1.75rem; font-weight:800; color:var(--dark); }
+        .sline{ width:55px; height:4px; background:var(--green); border-radius:2px; margin:10px auto; }
+
+        /* BRAND CARDS */
+        .bsec{ background:#fff; }
+        .bcard{ background:#fff; border-radius:12px; border:1px solid #eee; padding:20px 16px; height:100%; transition:transform .2s,box-shadow .2s; }
+        .bcard:hover{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,.07); }
+        .bcard.feat{ border:2px solid var(--green); }
+        .blog{ width:50px; height:50px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:800; letter-spacing:.5px; margin-bottom:11px; }
+        .lhik{ background:#e8f5e9; color:#2e7d32; }
+        .ldah{ background:#e3f2fd; color:#1565c0; }
+        .lcp{ background:#fce4ec; color:#c62828; }
+        .lsam{ background:#e8eaf6; color:#283593; }
+        .ltvt{ background:#fff3e0; color:#e65100; }
+        .prb{ display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px dashed #eee; font-size:.8rem; }
+        .prb:last-of-type{ border:none; }
+        .tn{ color:#666; }
+        .tp{ font-weight:700; color:var(--dark); }
+
+        /* SERVICE SECTION */
+        .ssec{ background:#f4f6f8; }
+        .scard{ background:#fff; border-radius:12px; border:1.5px solid #eee; padding:22px; height:100%; cursor:pointer; transition:all .2s; }
+        .scard:hover{ border-color:var(--green); box-shadow:0 6px 18px rgba(46,204,113,.12); }
+        .sico{ width:50px; height:50px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.35rem; color:#fff; margin-bottom:11px; }
+        .bkform{ background:#fff; border:2px solid var(--green); border-radius:12px; padding:24px; margin-top:20px; display:none; }
+
+        /* MADURAI AREAS */
+        .areasec{ background:linear-gradient(135deg,var(--dark),var(--dark2)); padding:52px 0; }
+        .abadge{ display:inline-block; padding:5px 12px; background:rgba(46,204,113,.13); color:#7ee8a2; border:1px solid rgba(46,204,113,.28); border-radius:14px; font-size:.76rem; margin:3px; }
+
+        /* FOUNDER CARD */
+        .founder-card{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:24px; }
+        .founder-avatar{ width:70px; height:70px; background:linear-gradient(135deg,var(--green),var(--gd)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:#fff; margin:0 auto 12px; }
+        .chat-btn{ background:#25d366; color:#fff; padding:7px 18px; border-radius:8px; font-weight:700; text-decoration:none; font-size:.82rem; display:inline-block; }
+
+        /* FOOTER */
+        .footer{ background:#111827; color:#9ca3af; padding:36px 0 16px; }
+        .footer h6{ color:#fff; font-weight:700; margin-bottom:12px; }
+        .footer a{ color:#9ca3af; text-decoration:none; }
+        .footer a:hover{ color:var(--green); }
+        .fbot{ border-top:1px solid rgba(255,255,255,.08); margin-top:26px; padding-top:15px; text-align:center; font-size:.78rem; }
+
+        /* FLOATS */
+        .wafloat{ position:fixed; bottom:80px; right:22px; background:#25d366; color:#fff; border-radius:50%; width:52px; height:52px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; z-index:999; box-shadow:0 4px 14px rgba(37,211,102,.4); text-decoration:none; }
+        .wafloat:hover{ color:#fff; transform:scale(1.08); }
+        .stbtn{ position:fixed; bottom:22px; right:22px; background:var(--green); color:#fff; border:none; border-radius:50%; width:44px; height:44px; font-size:1.1rem; cursor:pointer; z-index:998; display:none; box-shadow:0 3px 12px rgba(46,204,113,.35); }
+
+        /* TESTIMONIALS */
+        .tsec{ background:#fff; }
+        .tcard{ background:#f8f9fa; border-radius:12px; padding:22px; border-left:4px solid var(--green); }
+        .tcard p{ font-style:italic; color:#555; font-size:.86rem; margin-bottom:10px; }
+        .tname{ font-weight:700; color:var(--dark); font-size:.84rem; }
+
+        .hero-title{ font-size:2.1rem; font-weight:800; margin:7px 0 5px; }
+        .hero-subtitle{ color:#aaa; font-size:.9rem; margin-bottom:18px; }
+        .hero-strong{ color:#fff; }
+        .quick-label{ color:#aaa; font-size:.76rem; align-self:center; }
+        .filter-price-value{ font-size:.8rem; font-weight:700; color:var(--green); }
+        .price-range-info{ font-size:.7rem; color:#aaa; margin-top:2px; }
+        .loading-message{ color:#888; font-size:.88rem; }
+        .sort-label{ font-size:.78rem; color:#888; }
+        .section-copy{ color:#888; margin-top:6px; font-size:.88rem; }
+        .brand-accent{ color:var(--green); }
+        .brand-card-title{ font-weight:800; font-size:.9rem; }
+        .brand-card-copy{ font-size:.7rem; color:#aaa; margin-bottom:10px; }
+        .best-brand-badge{ background:var(--green); color:#fff; font-size:.62rem; font-weight:800; padding:3px 8px; border-radius:4px; display:inline-block; margin-bottom:7px; }
+        .service-subtitle{ color:#888; font-size:.88rem; margin-top:6px; }
+        .service-description{ font-size:.82rem; color:#666; margin-bottom:8px; }
+        .service-meta{ font-size:.76rem; color:var(--green); font-weight:600; }
+        .service-icon-install{ background:linear-gradient(135deg,#2ecc71,#27ae60); }
+        .service-icon-repair{ background:linear-gradient(135deg,#e74c3c,#c0392b); }
+        .service-icon-amc{ background:linear-gradient(135deg,#3498db,#2980b9); }
+        .service-icon-app{ background:linear-gradient(135deg,#9b59b6,#8e44ad); }
+        .service-icon-storage{ background:linear-gradient(135deg,#f39c12,#e67e22); }
+        .service-icon-survey{ background:linear-gradient(135deg,#1abc9c,#16a085); }
+        .booking-title{ font-weight:700; color:var(--dark); margin-bottom:16px; }
+        .booking-action{ background:var(--green); color:#fff; border:none; border-radius:8px; padding:9px 20px; font-weight:700; cursor:pointer; }
+        .booking-whatsapp{ background:#25d366; color:#fff; padding:9px 18px; border-radius:8px; font-weight:700; text-decoration:none; font-size:.86rem; }
+        .booking-close{ background:none; border:none; color:#aaa; font-size:1.5rem; cursor:pointer; line-height:1; }
+        .section-heading{ font-size:1.75rem; font-weight:800; color:#fff; }
+        .section-subtitle{ color:#aaa; margin-top:8px; font-size:.88rem; }
+        .info-card{ background:#fff; border-radius:14px; padding:28px; box-shadow:0 4px 16px rgba(0,0,0,.06); }
+        .info-card-title{ font-weight:700; margin-bottom:16px; color:var(--dark); }
+        .info-card-list{ line-height:2.4; font-size:.88rem; }
+        .contact-link{ color:var(--dark); text-decoration:none; font-weight:600; }
+        .contact-icon{ color:var(--green); }
+        .contact-action{ background:var(--green); color:#fff; border:none; border-radius:8px; padding:10px; font-weight:700; cursor:pointer; font-size:.9rem; }
+        .site-footer{ background:#111827; color:#9ca3af; padding:36px 0 16px; }
+        .footer-intro{ font-size:.82rem; line-height:1.8; }
+        .footer-list{ list-style:none; padding:0; font-size:.8rem; line-height:2.1; }
+        .footer-contact{ font-size:.8rem; line-height:2.2; }
+        .footer-copy{ color:#6b7280; }
+        .review-stars{ color:#f39c12; margin-bottom:8px; }
+        .whatsapp-icon{ color:#25d366; }
+        .social-link{ color:inherit; }
+        .social-link:hover{ color:var(--green); }
+        .footer-social-link{ color:#9ca3af; text-decoration:none; }
+        .footer-social-link:hover{ color:var(--green); }
+        .review-heading{ color:var(--green); }
+        .empty-state{ grid-column:1/-1; text-align:center; padding:50px; color:#aaa; }
+        .empty-state-icon{ font-size:2.5rem; }
+        .retry-btn{ background:var(--green); color:#fff; border:none; padding:9px 22px; border-radius:8px; font-weight:700; cursor:pointer; margin-top:8px; }
+        .founder-name{ color:#fff; font-weight:700; }
+        .founder-role{ color:var(--green); font-size:.8rem; font-weight:600; }
+        .founder-copy{ color:#aaa; font-size:.76rem; margin-top:8px; }
+        .founder-icon{ font-size:2rem; color:var(--green); }
+        .founder-contact-link{ color:var(--green); font-size:.78rem; font-weight:600; text-decoration:none; }
+        .founder-contact-copy{ color:#aaa; font-size:.76rem; margin-top:8px; }
+        .book-link{ color:var(--green); }
+
+        select{ border:1px solid #ddd; border-radius:7px; font-size:.8rem; padding:5px 10px; }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="container d-flex justify-content-between flex-wrap gap-1">
+        <div><i class="bi bi-geo-alt-fill me-1"></i>Melur, Madurai - 625106, Tamil Nadu, India</div>
+        <div class="d-flex gap-3 flex-wrap">
+            <a href="tel:+7904038552"><i class="bi bi-telephone-fill me-1"></i>+91 79040 38552</a>
+            <a rel="noopener noreferrer" href="https://wa.me/7904038552" target="_blank"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
+            <a href="mailto:malidevan006@gmail.com"><i class="bi bi-envelope-fill me-1"></i>malidevan006@gmail.com</a>
+        </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="#" class="brand"><i class="bi bi-camera-video-fill me-2"></i>Vinayagam <span>CCTV</span></a>
+        <div class="navlinks d-none d-md-block">
+            <a href="#home">Home</a>
+            <a href="#products" class="active">Buy CCTV</a>
+            <a href="#brands">Brands</a>
+            <a href="#services">Services</a>
+            <a href="#madurai">Madurai</a>
+            <a href="#contact">Contact</a>
+            <a th:if="${session.customerId == null}" href="/signup">Sign Up</a>
+            <a th:if="${session.customerId != null}" href="/profile">
+                <i class="bi bi-person-circle me-1"></i>Profile
+            </a>
+            <a th:if="${session.customerId == null}" href="/signin">Sign In</a>
+            <a th:if="${session.customerId != null}" href="/logout">Logout</a>
+        </div>
+        <a href="tel:+7904038552" class="callbtn d-none d-md-inline-block">
+            <i class="bi bi-telephone-fill me-1"></i>Call Now
+        </a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+    <div class="container">
+        <div class="aipill"><i class="bi bi-stars me-1"></i>AI-Powered Live Search</div>
+        <h1 class="hero-title">
+            Best CCTV &amp; <span class="brand-accent">Security Solutions</span>
+        </h1>
+        <p class="hero-subtitle">
+            Live products from Amazon &amp; Flipkart · Expert installation in Madurai &amp; Melur by <strong class="hero-strong">Mr. Ajith Kumar (CEO)</strong>
+        </p>
+        <div class="d-flex">
+            <input type="text" class="sbox" id="sinput"
+                   placeholder="Search: 4MP night vision Hikvision outdoor camera under ₹3000..."
+                   onkeydown="if(event.key==='Enter') doSearch()"/>
+            <button class="sbtn" onclick="doSearch()"><i class="bi bi-search me-1"></i>Search</button>
+        </div>
+        <div class="mt-3 d-flex flex-wrap gap-2">
+            <span class="quick-label">Quick:</span>
+            <button class="qchip" onclick="qs('best budget CCTV camera under 2000 India')">Under ₹2,000</button>
+            <button class="qchip" onclick="qs('outdoor weatherproof bullet camera India')">Outdoor</button>
+            <button class="qchip" onclick="qs('WiFi wireless home CCTV camera India')">WiFi Camera</button>
+            <button class="qchip" onclick="qs('4K 8MP CCTV camera high resolution India')">4K / 8MP</button>
+            <button class="qchip" onclick="qs('Hikvision CCTV camera India best price')">Hikvision</button>
+            <button class="qchip" onclick="qs('CP Plus CCTV camera best price India')">CP Plus</button>
+            <button class="qchip" onclick="qs('PTZ pan tilt zoom CCTV camera India')">PTZ</button>
+            <button class="qchip" onclick="qs('Dahua CCTV camera India')">Dahua</button>
+        </div>
+    </div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<div class="container" id="products">
+    <div class="layout">
+
+        <!-- FILTER PANEL -->
+        <div>
+            <div class="fpanel">
+                <div class="fhead"><i class="bi bi-funnel-fill me-1"></i>Filter Cameras</div>
+
+                <div class="fgrp">
+                    <div class="flbl">Brand</div>
+                    <span class="chip on" data-f="brand" data-v="all" onclick="fc(this)">All</span>
+                    <span class="chip" data-f="brand" data-v="hikvision" onclick="fc(this)">Hikvision</span>
+                    <span class="chip" data-f="brand" data-v="dahua" onclick="fc(this)">Dahua</span>
+                    <span class="chip" data-f="brand" data-v="cp plus" onclick="fc(this)">CP Plus</span>
+                    <span class="chip" data-f="brand" data-v="samsung" onclick="fc(this)">Samsung</span>
+                    <span class="chip" data-f="brand" data-v="tvt" onclick="fc(this)">TVT</span>
+                </div>
+
+                <div class="fgrp">
+                    <div class="flbl">Camera Type</div>
+                    <span class="chip on" data-f="type" data-v="all" onclick="fc(this)">All</span>
+                    <span class="chip" data-f="type" data-v="dome" onclick="fc(this)">Dome</span>
+                    <span class="chip" data-f="type" data-v="bullet" onclick="fc(this)">Bullet</span>
+                    <span class="chip" data-f="type" data-v="ptz" onclick="fc(this)">PTZ</span>
+                    <span class="chip" data-f="type" data-v="wifi" onclick="fc(this)">WiFi</span>
+                    <span class="chip" data-f="type" data-v="ip" onclick="fc(this)">IP</span>
+                </div>
+
+                <div class="fgrp">
+                    <div class="flbl">Resolution</div>
+                    <span class="chip on" data-f="mp" data-v="all" onclick="fc(this)">All</span>
+                    <span class="chip" data-f="mp" data-v="2mp" onclick="fc(this)">2MP</span>
+                    <span class="chip" data-f="mp" data-v="4mp" onclick="fc(this)">4MP</span>
+                    <span class="chip" data-f="mp" data-v="5mp" onclick="fc(this)">5MP</span>
+                    <span class="chip" data-f="mp" data-v="8mp" onclick="fc(this)">8MP/4K</span>
+                </div>
+
+                <div class="fgrp">
+                    <div class="flbl">Buy From</div>
+                    <span class="chip on" data-f="src" data-v="all" onclick="fc(this)">All</span>
+                    <span class="chip" data-f="src" data-v="amazon" onclick="fc(this)">Amazon</span>
+                    <span class="chip" data-f="src" data-v="flipkart" onclick="fc(this)">Flipkart</span>
+                </div>
+
+                <div class="fgrp">
+                    <div class="d-flex justify-content-between">
+                        <div class="flbl">Max Price</div>
+                        <span id="pval" class="filter-price-value">₹15,000</span>
+                    </div>
+                    <label for="prange" class="visually-hidden">Maximum price filter</label>
+                    <input type="range" class="pslider" min="500" max="50000" step="500"
+                           value="15000" id="prange" oninput="pchange(this.value)" title="Maximum price" aria-label="Maximum price slider"/>
+                    <div class="d-flex justify-content-between price-range-info">
+                        <span>₹500</span><span>₹50,000</span>
+                    </div>
+                </div>
+
+                <button class="rbtn" onclick="resetAll()">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>Reset Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCTS AREA -->
+        <div>
+            <div id="aibox" class="aibox">
+                <i class="bi bi-stars text-success me-1"></i><span id="aimsg"></span>
+            </div>
+
+            <div id="ldiv" class="ldwrap d-none">
+                <div class="spin"></div>
+                <p class="loading-message">AI is fetching live camera data from Amazon &amp; Flipkart…</p>
+            </div>
+
+            <div id="parea">
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div class="rmeta" id="rmeta">Loading products…</div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="sort-label">Sort by:</span>
+                       
+                          <select id="sortsel" onchange="doSort()" title="Sort products">
+                            <option value="pop">Most Popular</option>
+                            <option value="low">Price: Low → High</option>
+                            <option value="high">Price: High → Low</option>
+                            <option value="rate">Best Rated</option>
+                            <option value="disc">Max Discount</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pgrid" id="pgrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BRAND PRICE GUIDE -->
+<section class="secpad bsec" id="brands">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="stitle">Brand <span class="brand-accent">Price Guide</span></h2>
+            <div class="sline"></div>
+            <p class="section-copy">
+                Genuine 2024 market prices · Available at Vinayagam CCTV, Melur, Madurai-625106
+            </p>
+        </div>
+        <div class="row g-4">
+            <div class="col-6 col-lg">
+                <div class="bcard">
+                    <div class="blog lhik">HIK</div>
+                    <h6 class="brand-card-title">Hikvision</h6>
+                    <p class="brand-card-copy">World #1 · Military grade</p>
+                    <div class="prb"><span class="tn">2MP Bullet</span><span class="tp">₹1,200</span></div>
+                    <div class="prb"><span class="tn">4MP Dome</span><span class="tp">₹2,400</span></div>
+                    <div class="prb"><span class="tn">5MP IR</span><span class="tp">₹3,200</span></div>
+                    <div class="prb"><span class="tn">8MP 4K</span><span class="tp">₹4,800</span></div>
+                    <div class="prb"><span class="tn">PTZ 20x</span><span class="tp">₹12,500</span></div>
+                    <a href="https://www.amazon.in/s?k=hikvision+cctv+camera" target="_blank" rel="noopener" class="bam mt-3"><i class="bi bi-bag-fill me-1"></i>Buy Amazon</a>
+                    <a  href="https://www.flipkart.com/search?q=hikvision+cctv" target="_blank" rel="noopener" class="bfk"><i class="bi bi-cart-fill me-1"></i>Buy Flipkart</a>
+                </div>
+            </div>
+            <div class="col-6 col-lg">
+                <div class="bcard">
+                    <div class="blog ldah">DAH</div>
+                    <h6 class="brand-card-title">Dahua</h6>
+                    <p class="brand-card-copy">World #2 · AI analytics</p>
+                    <div class="prb"><span class="tn">2MP Bullet</span><span class="tp">₹1,100</span></div>
+                    <div class="prb"><span class="tn">4MP Dome</span><span class="tp">₹2,200</span></div>
+                    <div class="prb"><span class="tn">5MP IR</span><span class="tp">₹2,900</span></div>
+                    <div class="prb"><span class="tn">8MP 4K</span><span class="tp">₹4,400</span></div>
+                    <div class="prb"><span class="tn">PTZ 20x</span><span class="tp">₹11,000</span></div>
+                    <a href="https://www.amazon.in/s?k=dahua+cctv+camera" target="_blank" rel="noopener" class="bam mt-3"><i class="bi bi-bag-fill me-1"></i>Buy Amazon</a>
+                    <a href="https://www.flipkart.com/search?q=dahua+cctv" target="_blank" rel="noopener" class="bfk"><i class="bi bi-cart-fill me-1"></i>Buy Flipkart</a>
+                </div>
+            </div>
+            <div class="col-6 col-lg">
+                <div class="bcard feat">
+                    <span class="best-brand-badge">★ BEST IN MADURAI</span>
+                    <div class="blog lcp">CP+</div>
+                    <h6 class="brand-card-title">CP Plus</h6>
+                    <p class="brand-card-copy">India #1 · Best value</p>
+                    <div class="prb"><span class="tn">2MP Bullet</span><span class="tp">₹900</span></div>
+                    <div class="prb"><span class="tn">4MP Dome</span><span class="tp">₹1,800</span></div>
+                    <div class="prb"><span class="tn">5MP IR</span><span class="tp">₹2,500</span></div>
+                    <div class="prb"><span class="tn">8MP 4K</span><span class="tp">₹3,600</span></div>
+                    <div class="prb"><span class="tn">PTZ 20x</span><span class="tp">₹9,500</span></div>
+                    <a href="https://www.amazon.in/s?k=cp+plus+cctv+camera" target="_blank" rel="noopener" class="bam mt-3"><i class="bi bi-bag-fill me-1"></i>Buy Amazon</a>
+                    <a href="https://www.flipkart.com/search?q=cp+plus+cctv" target="_blank" rel="noopener" class="bfk"><i class="bi bi-cart-fill me-1"></i>Buy Flipkart</a>
+                </div>
+            </div>
+            <div class="col-6 col-lg">
+                <div class="bcard">
+                    <div class="blog lsam">SAM</div>
+                    <h6 class="brand-card-title">Samsung Wisenet</h6>
+                    <p class="brand-card-copy">Premium · Smart analytics</p>
+                    <div class="prb"><span class="tn">2MP Bullet</span><span class="tp">₹2,200</span></div>
+                    <div class="prb"><span class="tn">4MP Dome</span><span class="tp">₹3,800</span></div>
+                    <div class="prb"><span class="tn">5MP IR</span><span class="tp">₹5,000</span></div>
+                    <div class="prb"><span class="tn">8MP 4K</span><span class="tp">₹7,500</span></div>
+                    <div class="prb"><span class="tn">PTZ 20x</span><span class="tp">₹18,000</span></div>
+                    <a href="https://www.amazon.in/s?k=samsung+wisenet+cctv" target="_blank" rel="noopener" class="bam mt-3"><i class="bi bi-bag-fill me-1"></i>Buy Amazon</a>
+                    <a href="https://www.flipkart.com/search?q=samsung+wisenet+cctv" target="_blank" rel="noopener" class="bfk"><i class="bi bi-cart-fill me-1"></i>Buy Flipkart</a>
+                </div>
+            </div>
+            <div class="col-6 col-lg">
+                <div class="bcard">
+                    <div class="blog ltvt">TVT</div>
+                    <h6 class="brand-card-title">TVT / Provision</h6>
+                    <p class="brand-card-copy">Budget · Solid performance</p>
+                    <div class="prb"><span class="tn">2MP Bullet</span><span class="tp">₹800</span></div>
+                    <div class="prb"><span class="tn">4MP Dome</span><span class="tp">₹1,600</span></div>
+                    <div class="prb"><span class="tn">5MP IR</span><span class="tp">₹2,200</span></div>
+                    <div class="prb"><span class="tn">8MP 4K</span><span class="tp">₹3,200</span></div>
+                    <div class="prb"><span class="tn">PTZ 20x</span><span class="tp">₹8,500</span></div>
+                    <a href="https://www.amazon.in/s?k=tvt+cctv+camera" target="_blank" rel="noopener" class="bam mt-3"><i class="bi bi-bag-fill me-1"></i>Buy Amazon</a>
+                    <a href="https://www.flipkart.com/search?q=tvt+cctv+camera" target="_blank" rel="noopener" class="bfk"><i class="bi bi-cart-fill me-1"></i>Buy Flipkart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CUSTOMER SERVICES -->
+<section class="secpad ssec" id="services">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="stitle">Customer <span class="brand-accent">Services</span></h2>
+            <div class="sline"></div>
+            <p class="service-subtitle">Click any service to book — Mr. Ajith Kumar's team responds within 2 hours in Madurai</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="scard" onclick="bookSvc('CCTV Installation')">
+                    <div class="sico service-icon-install"><i class="bi bi-tools"></i></div>
+                    <h6 class="fw-bold">CCTV Installation</h6>
+                    <p class="service-description">Professional installation of any brand at home, shop, office. Neat cable management.</p>
+                    <div class="service-meta"><i class="bi bi-clock me-1"></i>Same day · From ₹300/camera</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scard" onclick="bookSvc('CCTV Repair')">
+                    <div class="sico service-icon-repair"><i class="bi bi-wrench-adjustable"></i></div>
+                    <h6 class="fw-bold">CCTV Repair</h6>
+                    <p class="service-description">Camera down? DVR/NVR issue? Night vision problem? We fix all brands.</p>
+                    <div class="service-meta"><i class="bi bi-clock me-1"></i>2-hour response · Free diagnosis</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scard" onclick="bookSvc('Annual Maintenance Contract (AMC)')">
+                    <div class="sico service-icon-amc"><i class="bi bi-shield-check"></i></div>
+                    <h6 class="fw-bold">AMC Contract</h6>
+                    <p class="service-description">Annual contract — unlimited visits, priority support, free labour &amp; genuine parts.</p>
+                    <div class="service-meta"><i class="bi bi-star-fill me-1"></i>₹1,500/camera/year</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scard" onclick="bookSvc('Mobile App Remote Viewing Setup')">
+                    <div class="sico service-icon-app"><i class="bi bi-phone-fill"></i></div>
+                    <h6 class="fw-bold">Mobile App Setup</h6>
+                    <p class="service-description">Watch live from anywhere. We configure iVMS-4500, DMSS, CMS apps on your phone.</p>
+                    <div class="service-meta"><i class="bi bi-clock me-1"></i>30-min setup · iOS &amp; Android</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scard" onclick="bookSvc('DVR / NVR Setup')">
+                    <div class="sico service-icon-storage"><i class="bi bi-hdd-stack-fill"></i></div>
+                    <h6 class="fw-bold">DVR / NVR Setup</h6>
+                    <p class="service-description">Full recording system with HDD, channel config, playback &amp; backup setup.</p>
+                    <div class="service-meta"><i class="bi bi-check-circle me-1"></i>All brands · All models</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scard" onclick="bookSvc('Free Site Survey &amp; Quotation')">
+                    <div class="sico service-icon-survey"><i class="bi bi-clipboard2-check-fill"></i></div>
+                    <h6 class="fw-bold">Free Site Survey</h6>
+                    <p class="service-description">Mr. Ajith Kumar personally visits, advises camera placement, gives free quote.</p>
+                    <div class="service-meta"><i class="bi bi-gift-fill me-1"></i>100% FREE · No obligation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOOKING FORM -->
+        <div id="bkform" class="bkform">
+            <h6 id="bktitle" class="booking-title"></h6>
+            <div class="row g-3">
+                <div class="col-md-4"><input type="text" class="form-control" id="bkn" placeholder="Your Name *"/></div>
+                <div class="col-md-4"><input type="tel" class="form-control" id="bkp" placeholder="Phone Number *"/></div>
+                <div class="col-md-4"><input type="text" class="form-control" id="bka" placeholder="Area in Madurai *"/></div>
+                <div class="col-12"><textarea class="form-control" id="bkm" rows="2" placeholder="Extra details (optional)"></textarea></div>
+                <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
+                    <button onclick="submitBk()" class="booking-action">
+                        <i class="bi bi-check-circle me-1"></i>Confirm Booking
+                    </button>
+                    <a id="walink" href="#" target="_blank" class="booking-whatsapp">
+                        <i class="bi bi-whatsapp me-1"></i>Book via WhatsApp
+                    </a>
+                    <button onclick="document.getElementById('bkform').style.display='none'" class="booking-close">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MADURAI INSTALLATION -->
+<section class="areasec" id="madurai">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-heading">
+                CCTV Installation Across <span class="brand-accent">Madurai</span>
+            </h2>
+            <p class="section-subtitle">
+                Vinayagam CCTV Service · CEO: <strong class="hero-strong">Mr. Ajith Kumar</strong> · Melur, Madurai-625106
+            </p>
+        </div>
+        <div class="text-center mb-5">
+            <span class="abadge">Melur</span><span class="abadge">Anna Nagar</span>
+            <span class="abadge">KK Nagar</span><span class="abadge">Thirunagar</span>
+            <span class="abadge">Goripalayam</span><span class="abadge">Bypass Road</span>
+            <span class="abadge">Tallakulam</span><span class="abadge">Teppakulam</span>
+            <span class="abadge">Sellur</span><span class="abadge">Villapuram</span>
+            <span class="abadge">SS Colony</span><span class="abadge">Surveyor Colony</span>
+            <span class="abadge">Palanganatham</span><span class="abadge">Avaniyapuram</span>
+            <span class="abadge">Mattuthavani</span><span class="abadge">Tiruparankundram</span>
+            <span class="abadge">Othakadai</span><span class="abadge">Uthangudi</span>
+            <span class="abadge">Madurai Junction</span><span class="abadge">Sivaganga Road</span>
+            <span class="abadge">Usilampatti</span><span class="abadge">Vadipatti</span>
+            <span class="abadge">Thirumangalam</span><span class="abadge">Melur Road</span>
+        </div>
+
+        <!-- FOUNDER + CONTACT CARDS -->
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-3 text-center">
+                <div class="founder-card">
+                    <div class="founder-avatar"><i class="bi bi-person-fill"></i></div>
+                    <h6 class="founder-name">Mr. Ajith Kumar</h6>
+                    <span class="founder-role">CEO &amp; Founder</span>
+                    <p class="founder-copy">Vinayagam CCTV Service<br/>Melur, Madurai - 625106</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="founder-card">
+                    <i class="bi bi-telephone-fill founder-icon"></i>
+                    <h6 class="founder-name mt-2">Call Us</h6>
+                    <a href="tel:+917904038552" class="book-link fw-bold fs-5 text-decoration-none">+91 79040 38552</a>
+                    <p class="founder-copy">Mon–Sat 9AM–7PM<br/>Emergency 24/7</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="founder-card">
+                    <i class="bi bi-whatsapp whatsapp-icon fs-2"></i>
+                    <h6 class="founder-name mt-2">WhatsApp</h6>
+                    <a href="https://wa.me/917904038552?text=Hi Mr. Ajith Kumar, I need CCTV service in Madurai." target="_blank" rel="noopener noreferrer"
+                       class="booking-whatsapp d-inline-block">
+                        Chat Now
+                    </a>
+                    <p class="founder-copy">Instant response</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="founder-card">
+                    <i class="bi bi-geo-alt-fill founder-icon"></i>
+                    <h6 class="founder-name mt-2">Our Location</h6>
+                    <p class="founder-copy">Melur, Madurai - 625106<br/>Tamil Nadu, India</p>
+                    <a href="https://maps.google.com/?q=Melur+Madurai+625106" target="_blank" rel="noopener noreferrer"
+                       class="founder-contact-link">
+                        <i class="bi bi-map me-1"></i>View on Map
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="secpad tsec">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="stitle">Customer <span class="review-heading">Reviews</span></h2>
+            <div class="sline"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="tcard">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"Mr. Ajith Kumar installed 8 cameras in my shop in just one day. Very professional service and affordable pricing. Highly recommend Vinayagam CCTV!"</p>
+                    <div class="tname">— Murugesan, Shop Owner, T Nagar Madurai</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tcard">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"Got 4 cameras installed for my home in Melur. Now watching live on mobile from Chennai. The team was neat and quick. Best CCTV service in Madurai!"</p>
+                    <div class="tname">— Kavitha, Homeowner, Melur</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tcard">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"AMC contract with Vinayagam CCTV for our office. They came within 1 hour when one camera stopped. Very reliable and honest pricing by Mr. Ajith Kumar!"</p>
+                    <div class="tname">— Sundaram, Office Manager, Bypass Road</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="secpad" id="contact">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="stitle">Get In <span class="brand-accent">Touch</span></h2>
+            <div class="sline"></div>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-5">
+                <div class="info-card">
+                    <h6 class="info-card-title">
+                        <i class="bi bi-person-lines-fill me-2 contact-icon"></i>Contact Mr. Ajith Kumar
+                    </h6>
+                    <div class="info-card-list">
+                        <div><i class="bi bi-person-badge-fill me-2 contact-icon"></i><strong>Mr. Ajith Kumar</strong> — CEO &amp; Founder</div>
+                        <div><i class="bi bi-building me-2 contact-icon"></i>Vinayagam CCTV Service</div>
+                        <div><i class="bi bi-geo-alt-fill me-2 contact-icon"></i>Melur, Madurai - 625106, Tamil Nadu, India</div>
+                        <div><i class="bi bi-telephone-fill me-2 contact-icon"></i><a href="tel:+917904038552" class="contact-link">+91 79040 38552</a></div>
+                        <div><i class="bi bi-whatsapp me-2 whatsapp-icon"></i><a href="https://wa.me/7904038552" target="_blank" rel="noopener noreferrer" class="contact-link">WhatsApp Chat</a></div>
+                        <div><i class="bi bi-envelope-fill me-2 contact-icon"></i><a href="mailto:malidevan006@gmail.com" class="contact-link">malidevan006@gmail.com</a></div>
+                        <div><i class="bi bi-clock-fill me-2 contact-icon"></i>Mon–Sat: 9AM–7PM | Emergency: 24/7</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="info-card">
+                    <h6 class="info-card-title">
+                        <i class="bi bi-envelope-paper-fill me-2 contact-icon"></i>Quick Enquiry
+                    </h6>
+                    <div class="d-flex flex-column gap-2">
+                        <input type="text" class="form-control" id="cn" placeholder="Your Name *"/>
+                        <input type="tel" class="form-control" id="cp" placeholder="Phone Number *"/>
+                        <input type="text" class="form-control" id="ca" placeholder="Your Area in Madurai"/>
+                        <select class="form-control" id="cs" title="Select service">
+                            <option value="">Select Service</option>
+                            <option>CCTV Installation</option>
+                            <option>CCTV Repair</option>
+                            <option>AMC Contract</option>
+                            <option>DVR / NVR Setup</option>
+                            <option>Mobile App Setup</option>
+                            <option>Free Site Survey</option>
+                            <option>CCTV Purchase Help</option>
+                        </select>
+                        <textarea class="form-control" id="cm" rows="2" placeholder="Message (optional)"></textarea>
+                        <button onclick="sendEnquiry()" class="contact-action">
+                            <i class="bi bi-whatsapp me-1"></i>Send via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer site-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <h6><i class="bi bi-camera-video-fill me-2 contact-icon"></i>Vinayagam CCTV Service</h6>
+                <p class="footer-intro">
+                    Founded by <strong class="hero-strong">Mr. Ajith Kumar (CEO)</strong><br/>
+                    Melur, Madurai - 625106, Tamil Nadu, India<br/>
+                    Madurai's most trusted CCTV partner.<br/>
+                    Quality products · Expert installation · 24/7 support
+                </p>
+                <div class="d-flex gap-3 mt-2">
+                    <a href="https://wa.me/7904038552" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp"><i class="bi bi-whatsapp fs-5"></i></a>
+                    <a href="tel:+917904038552" class="footer-social-link" aria-label="Call us"><i class="bi bi-telephone-fill fs-5"></i></a>
+                    <a href="mailto:malidevan006@gmail.com" class="footer-social-link" aria-label="Email us"><i class="bi bi-envelope-fill fs-5"></i></a>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h6>Services</h6>
+                <ul class="footer-list">
+                    <li><a href="#services">Installation</a></li>
+                    <li><a href="#services">Repair &amp; AMC</a></li>
+                    <li><a href="#services">DVR Setup</a></li>
+                    <li><a href="#services">Mobile App</a></li>
+                    <li><a href="#services">Site Survey</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h6>Brands</h6>
+                <ul class="footer-list">
+                    <li><a href="https://www.amazon.in/s?k=hikvision+cctv" target="_blank" rel="noopener noreferrer">Hikvision</a></li>
+                    <li><a href="https://www.amazon.in/s?k=dahua+cctv" target="_blank" rel="noopener noreferrer">Dahua</a></li>
+                    <li><a href="https://www.amazon.in/s?k=cp+plus+cctv" target="_blank" rel="noopener noreferrer">CP Plus</a></li>
+                    <li><a href="https://www.amazon.in/s?k=samsung+cctv" target="_blank" rel="noopener noreferrer">Samsung</a></li>
+                    <li><a href="https://www.amazon.in/s?k=tvt+cctv" target="_blank" rel="noopener noreferrer">TVT</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h6>Contact</h6>
+                <div class="footer-contact">
+                    <div><i class="bi bi-person-fill me-2 contact-icon"></i><strong class="hero-strong">Mr. Ajith Kumar</strong> (CEO)</div>
+                    <div><i class="bi bi-geo-alt-fill me-2 contact-icon"></i>Melur, Madurai - 625106, Tamil Nadu, India</div>
+                    <div><i class="bi bi-telephone-fill me-2 contact-icon"></i><a href="tel:+917904038552">+91 79040 38552</a></div>
+                    <div><i class="bi bi-clock-fill me-2 contact-icon"></i>Mon–Sat 9AM–7PM · Emergency 24/7</div>
+                </div>
+            </div>
+        </div>
+        <div class="fbot footer-copy">
+            &copy; 2024 <strong class="hero-strong">Vinayagam CCTV Service</strong> · CEO: Mr. Ajith Kumar · Melur, Madurai - 625106, Tamil Nadu
+        </div>
+    </div>
+</footer>
+
+<!-- FLOAT BUTTONS -->
+<a href="https://wa.me/7904038552" target="_blank" rel="noopener noreferrer" class="wafloat" aria-label="Contact via WhatsApp"><i class="bi bi-whatsapp"></i></a>
+<button class="stbtn" id="stbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ===== STATE =====
+let all = [], filt = { brand:'all', type:'all', mp:'all', src:'all', maxP:15000 };
+const defaultProducts = [
+    { id:1, title:'Hikvision 4MP Bullet Camera', brand:'hikvision', type:'bullet', mp:'4mp', price:4999, mrp:6999, rating:4.8, reviews:1180, src:'amazon', amUrl:'https://www.amazon.in/s?k=Hikvision+4MP+bullet+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=Hikvision+4MP+bullet+cctv+camera', specs:['4MP','Night Vision','IP67'], icon:'bi-camera-video', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#0f172a"/><rect x="90" y="92" width="420" height="216" rx="24" fill="#111827"/><rect x="118" y="120" width="220" height="132" rx="18" fill="#e2e8f0"/><rect x="368" y="154" width="86" height="66" rx="14" fill="#22c55e"/><circle cx="228" cy="186" r="46" fill="#0f172a"/><circle cx="228" cy="186" r="24" fill="#22c55e"/><rect x="160" y="282" width="280" height="24" rx="12" fill="#f8fafc" opacity="0.8"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">Hikvision</text></svg>') },
+    { id:2, title:'Dahua 2MP Dome Camera', brand:'dahua', type:'dome', mp:'2mp', price:3499, mrp:5199, rating:4.7, reviews:970, src:'flipkart', amUrl:'https://www.amazon.in/s?k=Dahua+2MP+dome+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=Dahua+2MP+dome+cctv+camera', specs:['2MP','Smart IR','Indoor'], icon:'bi-webcam', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#0b1120"/><circle cx="300" cy="207" r="120" fill="#1f2937"/><circle cx="300" cy="207" r="78" fill="#e2e8f0"/><circle cx="300" cy="207" r="35" fill="#22c55e"/><rect x="162" y="292" width="276" height="22" rx="11" fill="#f8fafc" opacity="0.8"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">Dahua</text></svg>') },
+    { id:3, title:'CP Plus 5MP WiFi Camera', brand:'cp plus', type:'wifi', mp:'5mp', price:5899, mrp:7999, rating:4.6, reviews:860, src:'amazon', amUrl:'https://www.amazon.in/s?k=CP+Plus+5MP+wifi+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=CP+Plus+5MP+wifi+cctv+camera', specs:['5MP','WiFi','Mobile App'], icon:'bi-camera', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#111827"/><rect x="120" y="104" width="360" height="188" rx="26" fill="#f8fafc"/><rect x="146" y="130" width="124" height="92" rx="16" fill="#22c55e"/><rect x="296" y="138" width="154" height="72" rx="16" fill="#0f172a"/><circle cx="372" cy="174" r="26" fill="#e2e8f0"/><rect x="174" y="282" width="252" height="20" rx="10" fill="#f8fafc" opacity="0.85"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">CP Plus</text></svg>') },
+    { id:4, title:'Samsung Wisenet 4MP Bullet', brand:'samsung', type:'bullet', mp:'4mp', price:6299, mrp:8999, rating:4.9, reviews:740, src:'flipkart', amUrl:'https://www.amazon.in/s?k=Samsung+Wisenet+4MP+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=Samsung+Wisenet+4MP+cctv+camera', specs:['4MP','Smart Analytics','IP66'], icon:'bi-camera-video', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#172554"/><rect x="90" y="96" width="420" height="206" rx="26" fill="#1e293b"/><rect x="132" y="124" width="178" height="112" rx="16" fill="#e2e8f0"/><rect x="342" y="150" width="102" height="74" rx="16" fill="#22c55e"/><circle cx="220" cy="180" r="36" fill="#172554"/><circle cx="220" cy="180" r="18" fill="#22c55e"/><rect x="160" y="282" width="280" height="22" rx="11" fill="#f8fafc" opacity="0.82"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#f8fafc">Samsung</text></svg>') },
+    { id:5, title:'TVT 8MP PTZ Camera', brand:'tvt', type:'ptz', mp:'8mp', price:10999, mrp:14999, rating:4.5, reviews:620, src:'amazon', amUrl:'https://www.amazon.in/s?k=TVT+8MP+PTZ+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=TVT+8MP+PTZ+cctv+camera', specs:['8MP','Pan Tilt','Night Vision'], icon:'bi-eye', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#1f2937"/><rect x="126" y="96" width="348" height="208" rx="28" fill="#111827"/><circle cx="300" cy="200" r="92" fill="#e2e8f0"/><circle cx="300" cy="200" r="56" fill="#22c55e"/><circle cx="300" cy="200" r="22" fill="#0f172a"/><rect x="176" y="282" width="248" height="22" rx="11" fill="#f8fafc" opacity="0.8"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">TVT</text></svg>') },
+    { id:6, title:'Hikvision 2MP Dome Camera', brand:'hikvision', type:'dome', mp:'2mp', price:2999, mrp:4599, rating:4.7, reviews:810, src:'flipkart', amUrl:'https://www.amazon.in/s?k=Hikvision+2MP+dome+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=Hikvision+2MP+dome+cctv+camera', specs:['2MP','Wide Angle','Indoor'], icon:'bi-webcam', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#0f172a"/><rect x="150" y="102" width="300" height="182" rx="26" fill="#1f2937"/><circle cx="300" cy="194" r="66" fill="#e2e8f0"/><circle cx="300" cy="194" r="32" fill="#22c55e"/><rect x="162" y="282" width="276" height="22" rx="11" fill="#f8fafc" opacity="0.8"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">Hikvision</text></svg>') },
+    { id:7, title:'Dahua 4MP Outdoor Bullet', brand:'dahua', type:'bullet', mp:'4mp', price:5499, mrp:7599, rating:4.8, reviews:910, src:'amazon', amUrl:'https://www.amazon.in/s?k=Dahua+4MP+outdoor+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=Dahua+4MP+outdoor+cctv+camera', specs:['4MP','Outdoor','IR Range'], icon:'bi-camera-video', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#0b1120"/><rect x="90" y="86" width="420" height="212" rx="24" fill="#1e293b"/><rect x="120" y="118" width="208" height="128" rx="20" fill="#e2e8f0"/><rect x="352" y="144" width="92" height="70" rx="14" fill="#22c55e"/><circle cx="224" cy="182" r="38" fill="#0f172a"/><circle cx="224" cy="182" r="18" fill="#22c55e"/><rect x="166" y="282" width="268" height="22" rx="11" fill="#f8fafc" opacity="0.8"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">Dahua</text></svg>') },
+    { id:8, title:'CP Plus 2MP Dome Camera', brand:'cp plus', type:'dome', mp:'2mp', price:2799, mrp:3999, rating:4.4, reviews:690, src:'flipkart', amUrl:'https://www.amazon.in/s?k=CP+Plus+2MP+dome+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=CP+Plus+2MP+dome+cctv+camera', specs:['2MP','Compact','Easy Install'], icon:'bi-camera', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#111827"/><circle cx="300" cy="208" r="118" fill="#1f2937"/><circle cx="300" cy="208" r="74" fill="#e2e8f0"/><circle cx="300" cy="208" r="34" fill="#22c55e"/><rect x="170" y="282" width="260" height="22" rx="11" fill="#f8fafc" opacity="0.82"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">CP Plus</text></svg>') },
+    { id:9, title:'Samsung Wisenet 5MP WiFi', brand:'samsung', type:'wifi', mp:'5mp', price:7599, mrp:9999, rating:4.8, reviews:560, src:'amazon', amUrl:'https://www.amazon.in/s?k=Samsung+Wisenet+5MP+wifi+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=Samsung+Wisenet+5MP+wifi+cctv+camera', specs:['5MP','WiFi','App Control'], icon:'bi-camera-video', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#172554"/><rect x="116" y="104" width="368" height="184" rx="26" fill="#1e293b"/><rect x="148" y="132" width="136" height="96" rx="18" fill="#e2e8f0"/><rect x="314" y="154" width="108" height="70" rx="16" fill="#22c55e"/><circle cx="216" cy="180" r="34" fill="#172554"/><circle cx="216" cy="180" r="16" fill="#22c55e"/><rect x="176" y="282" width="248" height="22" rx="11" fill="#f8fafc" opacity="0.82"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#f8fafc">Samsung</text></svg>') },
+    { id:10, title:'TVT 4MP Bullet Camera', brand:'tvt', type:'bullet', mp:'4mp', price:4199, mrp:5999, rating:4.5, reviews:720, src:'flipkart', amUrl:'https://www.amazon.in/s?k=TVT+4MP+bullet+cctv+camera', fkUrl:'https://www.flipkart.com/search?q=TVT+4MP+bullet+cctv+camera', specs:['4MP','Budget Friendly','Night Vision'], icon:'bi-eye', image:'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#1f2937"/><rect x="104" y="94" width="392" height="198" rx="24" fill="#111827"/><rect x="136" y="122" width="208" height="128" rx="18" fill="#e2e8f0"/><rect x="366" y="150" width="84" height="68" rx="14" fill="#22c55e"/><circle cx="240" cy="186" r="38" fill="#0f172a"/><circle cx="240" cy="186" r="18" fill="#22c55e"/><rect x="172" y="282" width="256" height="22" rx="11" fill="#f8fafc" opacity="0.8"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#f8fafc">TVT</text></svg>') }
+];
+
+// ===== LOAD ON START =====
+window.addEventListener('DOMContentLoaded', () => {
+    fetchProducts('popular CCTV cameras for home shop Madurai India 2024');
+});
+
+// ===== FETCH PRODUCTS =====
+async function fetchProducts(q) {
+    document.getElementById('ldiv').style.display = 'block';
+    document.getElementById('parea').style.display = 'none';
+    document.getElementById('aibox').style.display = 'none';
+    try {
+        const r = await fetch('https://api.anthropic.com/v1/messages', {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json' },
+            body: JSON.stringify({
+                model:'claude-sonnet-4-6',
+                max_tokens:1400,
+                system:`You are a CCTV product catalog AI for Vinayagam CCTV Service, Melur Madurai-625106. CEO: Mr. Ajith Kumar.
+Return ONLY a valid JSON array of 12 CCTV camera products. No markdown, no extra text, just the array.
+Each object:
+{
+  "id":number,
+  "title":"Brand Model resolution key-feature",
+  "brand":"hikvision|dahua|cp plus|samsung|tvt|other",
+  "type":"dome|bullet|ptz|wifi|ip",
+  "mp":"2mp|4mp|5mp|8mp",
+  "price":number,
+  "mrp":number,
+  "rating":number,
+  "reviews":number,
+  "src":"amazon|flipkart",
+  "amUrl":"https://www.amazon.in/s?k=SEARCH+TERM",
+  "fkUrl":"https://www.flipkart.com/search?q=SEARCH+TERM",
+  "specs":["spec1","spec2","spec3"],
+  "icon":"bi-camera-video|bi-camera|bi-webcam|bi-eye"
+}
+Use real model names (DS-2CD2143G2-I, CP-UNC-TA41L3, IPC-HDW2849H-S-IL etc).
+Mix amazon/flipkart sources. Realistic Indian market prices 2024. Return ONLY JSON array.`,
+                messages:[{ role:'user', content:`Products for query: ${q}` }]
+            })
+        });
+        const d = await r.json();
+        const raw = (d.content?.[0]?.text || '[]').replace(/```json|```/g,'').trim();
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length) {
+            all = parsed;
+            document.getElementById('aibox').style.display = 'block';
+            document.getElementById('aimsg').innerHTML = `<strong>AI found ${all.length} cameras</strong> for "<em>${q}</em>" — live data from Amazon &amp; Flipkart India`;
+        } else {
+            throw new Error('empty');
+        }
+    } catch(e) {
+        all = defaultProducts;
+        document.getElementById('aibox').style.display = 'block';
+        document.getElementById('aimsg').innerHTML = `<strong>Showing ${all.length} CCTV cameras</strong> for "<em>${q}</em>" — ready for customers in Madurai`;
+    } finally {
+        render();
+        document.getElementById('ldiv').style.display = 'none';
+        document.getElementById('parea').style.display = 'block';
+    }
+}
+
+// ===== RENDER PRODUCTS =====
+function render() {
+    const data = applyF(all);
+    document.getElementById('rmeta').innerHTML = `Showing <strong>${data.length}</strong> of <strong>${all.length}</strong> cameras`;
+    const g = document.getElementById('pgrid');
+    if (!data.length) {
+        g.innerHTML = `<div class="empty-state">
+            <i class="bi bi-search empty-state-icon"></i>
+            <p class="mt-3">No cameras match filters.</p>
+            <button onclick="resetAll()" class="retry-btn">Clear Filters</button>
+        </div>`;
+        return;
+    }
+    g.innerHTML = data.map(p => {
+        const d = Math.max(0, Math.round((1 - p.price/p.mrp)*100));
+        const st = '★'.repeat(Math.round(p.rating||4))+'☆'.repeat(5-Math.round(p.rating||4));
+        const sc = p.src==='amazon' ? 'samz' : 'sfk';
+        const sn = p.src==='amazon' ? 'Amazon' : 'Flipkart';
+        const bu = p.src==='amazon' ? p.amUrl : p.fkUrl;
+        const bc = p.src==='amazon' ? 'bam' : 'bfk';
+        const au = p.src==='amazon' ? p.fkUrl : p.amUrl;
+        const al = p.src==='amazon' ? 'Flipkart' : 'Amazon';
+        const ac = p.src==='amazon' ? 'bfk' : 'bam';
+        const tags = (p.specs||[]).slice(0,3).map(s=>`<span class="stag">${s}</span>`).join('');
+        const wa = `https://wa.me/7904038552?text=${encodeURIComponent(`Hi Mr. Ajith Kumar (Vinayagam CCTV),\n\nI want to buy: *${p.title}*\nPrice: ₹${p.price.toLocaleString('en-IN')}\n\nPlease confirm availability and installation in Madurai.`)}`;
+        return `<div class="pc">
+            <div class="iw">
+                <img class="product-image" src="${p.image || 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" rx="24" fill="#0f172a"/><rect x="90" y="92" width="420" height="216" rx="24" fill="#111827"/><circle cx="300" cy="200" r="92" fill="#e2e8f0"/><circle cx="300" cy="200" r="56" fill="#22c55e"/><circle cx="300" cy="200" r="22" fill="#0f172a"/><text x="300" y="338" text-anchor="middle" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#f8fafc">CCTV</text></svg>')}" alt="${p.title}">
+                <span class="marketing-pill">Free install • Madurai</span>
+                <span class="bbrand">${(p.brand||'').toUpperCase()}</span>
+                <span class="bsrc ${sc}">${sn}</span>
+            </div>
+            <div class="cbody">
+                <div class="ptitle">${p.title}</div>
+                <div class="stags">${tags}</div>
+                <div class="pstars">${st} <span>(${(p.reviews||0).toLocaleString()})</span></div>
+                <div class="prow">
+                    <span class="pprice">₹${(p.price||0).toLocaleString('en-IN')}</span>
+                    <span class="pmrp">₹${(p.mrp||0).toLocaleString('en-IN')}</span>
+                    ${d>0?`<span class="pdisc">${d}% off</span>`:''}
+                </div>
+                <a href="${bu}" target="_blank" rel="noopener noreferrer" class="${bc}"><i class="bi bi-bag-check-fill me-1"></i>Buy on ${sn}</a>
+                <a href="${au}" target="_blank" rel="noopener noreferrer" class="${ac}"><i class="bi bi-cart-fill me-1"></i>Also on ${al}</a>
+                <a href="${wa}" target="_blank" rel="noopener noreferrer" class="bins"><i class="bi bi-tools me-1"></i>Install in Madurai</a>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function getProductImage(p) {
+    const brand = (p.brand || 'cctv').toLowerCase();
+    const type = p.type === 'wifi' ? 'WiFi' : p.type === 'ptz' ? 'PTZ' : p.type === 'dome' ? 'Dome' : 'Bullet';
+    const mp = (p.mp || '4mp').toUpperCase();
+    const colors = {
+        hikvision: ['#2ecc71', '#1f2937'],
+        dahua: ['#3498db', '#0f172a'],
+        'cp plus': ['#ef4444', '#111827'],
+        samsung: ['#6366f1', '#111827'],
+        tvt: ['#f59e0b', '#111827']
+    };
+    const [primary, secondary] = colors[brand] || ['#2ecc71', '#111827'];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260">
+        <rect width="400" height="260" rx="24" fill="url(#g)"/>
+        <defs>
+            <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="${secondary}"/>
+            </linearGradient>
+        </defs>
+        <circle cx="320" cy="70" r="52" fill="rgba(255,255,255,0.16)"/>
+        <rect x="72" y="84" width="200" height="110" rx="16" fill="rgba(255,255,255,0.95)"/>
+        <rect x="92" y="104" width="160" height="70" rx="12" fill="${primary}"/>
+        <rect x="110" y="120" width="36" height="24" rx="6" fill="rgba(255,255,255,0.95)"/>
+        <rect x="158" y="120" width="58" height="24" rx="6" fill="rgba(255,255,255,0.95)"/>
+        <rect x="108" y="176" width="128" height="8" rx="4" fill="rgba(255,255,255,0.7)"/>
+        <path d="M300 112h26l22 26v24l-22 26h-26z" fill="${secondary}"/>
+        <circle cx="316" cy="138" r="12" fill="white"/>
+        <text x="72" y="227" font-family="Segoe UI, Arial" font-size="24" font-weight="700" fill="white">${(p.brand||'CCTV').toUpperCase()}</text>
+        <text x="72" y="248" font-family="Segoe UI, Arial" font-size="16" fill="rgba(255,255,255,0.9)">${type} • ${mp}</text>
+    </svg>`;
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function applyF(data) {
+    return data.filter(p => {
+        if (filt.brand!=='all' && !(p.brand||'').toLowerCase().includes(filt.brand)) return false;
+        if (filt.type!=='all' && p.type!==filt.type) return false;
+        if (filt.mp!=='all' && p.mp!==filt.mp) return false;
+        if (filt.src!=='all' && p.src!==filt.src) return false;
+        if ((p.price||0) > filt.maxP) return false;
+        return true;
+    });
+}
+
+function fc(el) {
+    const f=el.dataset.f, v=el.dataset.v;
+    filt[f]=v;
+    document.querySelectorAll(`[data-f="${f}"]`).forEach(c=>c.classList.toggle('on',c.dataset.v===v));
+    render();
+}
+
+function pchange(v) {
+    filt.maxP = parseInt(v);
+    document.getElementById('pval').textContent = '₹'+parseInt(v).toLocaleString('en-IN');
+    render();
+}
+
+function resetAll() {
+    filt = { brand:'all', type:'all', mp:'all', src:'all', maxP:15000 };
+    document.getElementById('prange').value = 15000;
+    document.getElementById('pval').textContent = '₹15,000';
+    document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.v==='all'));
+    render();
+}
+
+function doSort() {
+    const s = document.getElementById('sortsel').value;
+    if (s==='low') all.sort((a,b)=>a.price-b.price);
+    else if (s==='high') all.sort((a,b)=>b.price-a.price);
+    else if (s==='rate') all.sort((a,b)=>b.rating-a.rating);
+    else if (s==='disc') all.sort((a,b)=>(b.mrp-b.price)/b.mrp-(a.mrp-a.price)/a.mrp);
+    render();
+}
+
+function doSearch() {
+    const q = document.getElementById('sinput').value.trim();
+    if (q) fetchProducts(q);
+}
+function qs(q) { document.getElementById('sinput').value=q; fetchProducts(q); }
+
+// ===== SERVICE BOOKING =====
+let selSvc = '';
+function bookSvc(name) {
+    selSvc = name;
+    document.getElementById('bktitle').innerHTML = `<i class="bi bi-calendar-check-fill me-2" style="color:var(--green)"></i>Book: ${name}`;
+    const f = document.getElementById('bkform');
+    f.style.display = 'block';
+    f.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+function submitBk() {
+    const n=document.getElementById('bkn').value.trim();
+    const p=document.getElementById('bkp').value.trim();
+    const a=document.getElementById('bka').value.trim();
+    const m=document.getElementById('bkm').value.trim();
+    if (!n||!p||!a) { alert('Please fill Name, Phone and Area.'); return; }
+    const msg = `Hi Mr. Ajith Kumar (Vinayagam CCTV Service)!\n\nService: *${selSvc}*\nName: ${n}\nPhone: ${p}\nArea: ${a}, Madurai\nDetails: ${m||'N/A'}`;
+    const url = `https://wa.me/917904038552?text=${encodeURIComponent(msg)}`;
+    document.getElementById('walink').href = url;
+    window.open(url, '_blank');
+}
+
+// ===== ENQUIRY FORM =====
+function sendEnquiry() {
+    const n=document.getElementById('cn').value.trim();
+    const p=document.getElementById('cp').value.trim();
+    const a=document.getElementById('ca').value.trim();
+    const s=document.getElementById('cs').value;
+    const m=document.getElementById('cm').value.trim();
+    if (!n||!p) { alert('Please enter your name and phone.'); return; }
+    const msg = `Hi Mr. Ajith Kumar (Vinayagam CCTV)!\n\nName: ${n}\nPhone: ${p}\nArea: ${a||'Madurai'}\nService: ${s||'General Enquiry'}\nMessage: ${m||'N/A'}`;
+    window.open(`https://wa.me/917904038552?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ===== SCROLL TOP =====
+window.addEventListener('scroll', () => {
+    document.getElementById('stbtn').style.display = window.scrollY > 300 ? 'block' : 'none';
+});
+</script>
+</body>
+</html>
